@@ -1,0 +1,30 @@
+void LegMovement(float speed1 , float direction)
+{
+
+    float rotationThisFrame = rotationSpeed * Time.fixedDeltaTime * speed1;
+
+    if (isLeftLegForward)
+    {
+        // Rotate left leg forward
+        leftLeg.Rotate(-leftLeg.transform.forward * direction, rotationThisFrame );
+    }
+    else
+    {
+        // Rotate right leg forward
+        rightLeg.Rotate(-rightLeg.transform.forward* direction, rotationThisFrame);
+    }
+
+    // Update the current rotation angle
+    currentRotationAngle += rotationThisFrame;
+
+    // Check if the current leg rotation has reached the desired angle (90 degrees)
+    if (currentRotationAngle >= maxrotationangle)
+    {
+        
+        // Change the forward leg
+        isLeftLegForward = !isLeftLegForward;
+
+        // Reset the current rotation angle
+        currentRotationAngle = 0f;
+    }
+}
